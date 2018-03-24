@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("password", password);
         startActivityForResult(intent, REQUEST_SIGNUP);
 
-        /*new android.os.Handler().postDelayed(
+        new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
@@ -69,8 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 0);
-                */
+                }, 1000);
     }
 
     @Override
