@@ -25,6 +25,10 @@ public class Item {
         if (this.quantity < 0) isEaten = true;
     }
 
+    public double getQuantity() {
+        return quantity;
+    }
+
     public double getCarbs() {
         return quantity * type.nutritionalValue.carbs;
     }

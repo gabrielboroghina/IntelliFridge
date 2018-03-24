@@ -7,6 +7,7 @@ import com.example.gabri.intellifridge.engine.NutritionalValue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -102,7 +103,8 @@ public class Merchant {
             f *= (f2 * A_DESIRE + B_DESIRE) / (A_DESIRE + B_DESIRE);
             f *= (f3 * A_NATURE + B_NATURE) / (A_NATURE + B_NATURE);
             f *= (f4 * A_AVAILABILITY + B_AVAILABILITY) / (A_AVAILABILITY + B_AVAILABILITY);
-            ans.add(new Choice(new Item(type, quantity, null), f, f4));
+            Date date = new Date(2018, 3, (int)type.perishability + 25);
+            ans.add(new Choice(new Item(type, quantity, date), f, f4));
         }
         Collections.sort(ans);
 

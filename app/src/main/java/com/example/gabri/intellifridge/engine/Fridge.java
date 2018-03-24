@@ -14,6 +14,10 @@ public class Fridge {
         items = new TreeSet<Item>(new CompByExpiration());
     }
 
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
     public SortedSet<Item> getItems() {
         return items;
     }

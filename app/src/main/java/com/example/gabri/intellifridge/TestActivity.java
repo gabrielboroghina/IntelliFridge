@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.gabri.intellifridge.engine.Fridge;
+import com.example.gabri.intellifridge.engine.Merchant.Choice;
+import com.example.gabri.intellifridge.engine.Merchant;
 import com.example.gabri.intellifridge.engine.UserPreferences;
 
 
@@ -25,7 +27,17 @@ public class TestActivity extends AppCompatActivity {
 
     private static UserPreferences doStuff() {
         UserPreferences preference = new UserPreferences();
-        preference.addType("salmon", "fish", 5, 0, 20, 10);
+        preference.addType("salmon", "fish", 5, 0.0, 0.2, 0.1);
+        preference.addType("makrel", "fish", 4, 0.0, 0.3, 0.05);
+        preference.addType("bread", "fish", 1, 0.4, 0.2, 0.2);
+        preference.addType("wtf", "fish", 4, 0.2, 0.0, 0.4);
+
+        preference.addGrade("salmon", 3);
+        preference.addGrade("makrel", 0);
+        preference.addGrade("bread", 1);
+        preference.addGrade("wtf", 2);
+
+        return preference;
     }
 
     @Override
@@ -39,11 +51,16 @@ public class TestActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, list);;
         list_view.setAdapter(adapter);
+        final Fridge fridge = new Fridge();
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                list.add("WTF");
-                list.add("OMG");
+                UserPreferences pref = doStuff();
+                List<Choice> tmp = Merchant.giveSuggestions(pref, fridge, 5);
+                for (Choice choice : tmp) {
+                    list.add(choice.item.type.name + "|" + choice.item.getQuantity() + "|" + choice.importance + "|" + choice.availability);
+                }
+                fridge.addItem(tmp.get(0).item);
                 adapter.notifyDataSetChanged();
             }
         });
