@@ -16,8 +16,12 @@ public class UserPreferences {
         this.grades = new HashMap<ItemType, Double>();
     }
 
-    public void changeGrade(String name) {
-        //known_types.get()
+    public void changeGrade(String name, double x) {
+        ItemType type = known_types.get(name);
+        if (type == null) return;
+        Double grade = grades.get(type);
+        if (grade == null) return;
+        grades.put(type, x);
     }
 
     public void addPreference(String type_name) {

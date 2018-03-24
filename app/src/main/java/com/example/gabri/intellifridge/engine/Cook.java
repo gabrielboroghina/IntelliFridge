@@ -1,12 +1,7 @@
 package com.example.gabri.intellifridge.engine;
 
-import android.os.AsyncTask;
-
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.*;
+import com.example.gabri.intellifridge.util.*;
 
 /**
  * Created by Talksick on 3/24/2018.
@@ -32,7 +27,7 @@ public class Cook {
         sb.append(EDAMAM_URL);
         sb.append("?q=");
         for (Item item : items) {
-            sb.append(item.getName());
+            sb.append(item.type.name);
             sb.append('+');
         }
         sb.deleteCharAt(sb.length() - 1);
@@ -53,43 +48,5 @@ public class Cook {
             e.printStackTrace();
             return null;
         }
-    }
-}
-
-class HttpGetRequest extends AsyncTask<String, Void, String> {
-    private static final String REQUEST_METHOD = "GET";
-    private static final int READ_TIMEOUT = 15000;
-    private static final int CONNECTION_TIMEOUT = 15000;
-
-    @Override
-    protected String doInBackground(String... params){
-        String stringUrl = params[0];
-        String result;
-        String inputLine;
-        try {
-            URL myUrl = new URL(stringUrl);
-            HttpURLConnection connection =(HttpURLConnection) myUrl.openConnection();
-            connection.setRequestMethod(REQUEST_METHOD);
-            connection.setReadTimeout(READ_TIMEOUT);
-            connection.setConnectTimeout(CONNECTION_TIMEOUT);
-            connection.connect();
-            InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-            BufferedReader reader = new BufferedReader(streamReader);
-            StringBuilder stringBuilder = new StringBuilder();
-            while((inputLine = reader.readLine()) != null){
-                stringBuilder.append(inputLine);
-            }
-            reader.close();
-            streamReader.close();
-            result = stringBuilder.toString();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            result = null;
-        }
-        return result;
-    }
-    protected void onPostExecute(String result){
-        super.onPostExecute(result);
     }
 }
