@@ -4,14 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
     EditText emailText, passwordText;
@@ -38,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login() {
 
+        // validate credentials
         if (!validateData()) {
             onLoginFailed();
             return;
@@ -45,17 +44,19 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setEnabled(false);
 
+        // show progress dialog
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.Theme_AppCompat_DayNight_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
+        // get credentials
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        // call register to insert user preferences
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         intent.putExtra("email", email);
         intent.putExtra("password", password);
         startActivityForResult(intent, REQUEST_SIGNUP);
@@ -68,14 +69,13 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 1000);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
                 this.finish();
