@@ -16,7 +16,7 @@ public class UserPreferences {
     public final static int MAX_GRADE = 5;
 
     private double n_persons;
-    private Map<String, ItemType> known_types;
+    public Map<String, ItemType> known_types;
     private Map<ItemType, Integer> grades;
 
     public UserPreferences() {

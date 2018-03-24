@@ -5,13 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="4"
-        android:rating="2"
-        android:stepSize="1" />
-
     <TextView
         android:id="@+id/expandedListItem"
         android:layout_width="fill_parent"
@@ -19,4 +12,11 @@
         android:paddingBottom="10dp"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="10dp" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="4"
+        android:rating="2"
+        android:stepSize="1" />
 </LinearLayout>
