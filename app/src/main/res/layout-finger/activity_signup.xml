@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
 
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/grad_bkg"
     android:fitsSystemWindows="true"
@@ -22,53 +23,45 @@
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
         -->
+
         <!-- Email Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/MyHintText">
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="E-mail"
+                android:theme="@style/MyEditText" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
-
-        <EditText
-            android:id="@+id/input_email"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:background="@color/colorBkg"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:text="E-mail"
-            android:textColor="@color/colorText" />
+            app:hintTextAppearance="@style/MyHintText">
 
-        <EditText
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:background="@color/colorBkg"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="Password"
-            android:textColor="@color/colorText"
-            style=""/>
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:theme="@style/MyEditText" />
 
-        <android.support.v7.widget.AppCompatButton
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
             android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="24dp"
-            android:background="@color/colorBkg"
-            android:padding="12dp"
-            android:text="Login"
-            android:theme="@style/PrimaryButton" />
-
-        <TextView
-            android:id="@+id/link_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:text="No account yet? Create one"
-            android:textColor="@color/colorText"
-            android:textSize="16dip" />
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="Sign Up"
+            android:theme="@style/MyButton" />
 
     </LinearLayout>
 </ScrollView>
