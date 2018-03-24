@@ -44,6 +44,7 @@ public class UserPreferences {
     public void addType(String name, String category, double perishability, double carbs, double proteins, double fats) {
         ItemType type = new ItemType(name, category, new NutritionalValue(carbs, proteins, fats), perishability);
         known_types.put(name, type);
+        grades.put(type, 2);
     }
 
     public void addGrade(String name, int grade) {

@@ -1,6 +1,7 @@
 package com.example.gabri.intellifridge.util;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.gabri.intellifridge.engine.ItemType;
 import com.example.gabri.intellifridge.engine.UserDataSingleton;
@@ -49,6 +50,7 @@ public class DBRequest extends AsyncTask<String, Void, String> {
                 uPref.addType(cols[0], cols[5], Double.parseDouble(cols[1]), Double.parseDouble(cols[2]),
                         Double.parseDouble(cols[3]), Double.parseDouble(cols[4]));
             }
+            Log.i("OMG", "" + uPref.getTypes().size());
 
             return "Success";
 

@@ -1,6 +1,7 @@
 package com.example.gabri.intellifridge.engine;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.gabri.intellifridge.engine.NutritionalValue;
 
@@ -70,10 +71,15 @@ public class Merchant {
         return calories_need / calories / n_products;
     }
 
+    private static double estimate(double x) {
+        return ((int)(x / 50) + 1) * 50;
+    }
+
     public static List<Choice> giveSuggestions(UserPreferences preferences, Fridge fridge, int n_days) {
         double total_carbs_fridge = 0;
         double total_proteins_fridge = 0;
         double total_fats_fridge = 0;
+
         for (Item item : fridge.getItems()) {
             total_carbs_fridge += item.getCarbs();
             total_proteins_fridge += item.getProteins();
@@ -88,6 +94,7 @@ public class Merchant {
         if (total_fats_need < 0) total_fats_need = 0;
 
         double total_calorie_need = NutritionalValue.computeCalories(total_carbs_need, total_proteins_need, total_fats_need);
+        Log.i("Total calories needed", "" + total_calorie_need);
 
         double relative_carbs_need = total_carbs_need / n_days / preferences.getCarbsPerDay();
         double relative_proteins_need = total_proteins_need / n_days / preferences.getProteinsPerDay();
@@ -95,7 +102,7 @@ public class Merchant {
 
         List<Choice> ans = new ArrayList<Choice>();
         for (ItemType type : preferences.getTypes()) {
-            double quantity = computeQuantity(type.nutritionalValue.getCalories(), total_calorie_need, n_days);
+            double quantity = estimate(computeQuantity(type.nutritionalValue.getCalories(), total_calorie_need, n_days));
             double f1 = computeDecayFactor(type, n_days);
             double f2 = computeDesireFactor(type, preferences);
             double f3 = computeNatureFactor(type, preferences, relative_carbs_need, relative_proteins_need, relative_fats_need);
@@ -109,7 +116,6 @@ public class Merchant {
             ans.add(new Choice(new Item(type, quantity, cal.getTime()), f, f4));
         }
         Collections.sort(ans);
-
         return ans;
     }
 
