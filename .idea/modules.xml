@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/IntelliFridge.iml" filepath="$PROJECT_DIR$/IntelliFridge.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dp-experts.iml" filepath="$PROJECT_DIR$/dp-experts.iml" />
+      <module fileurl="file://E:\Apps\IntelliFridge\dp-experts.iml" filepath="E:\Apps\IntelliFridge\dp-experts.iml" />
     </modules>
   </component>
 </project>
