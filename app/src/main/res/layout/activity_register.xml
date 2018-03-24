@@ -6,9 +6,16 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        style="@style/MyCardViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="200dp">
+
+        <TextView
+            android:text="Hello World!"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/MyCardViewStyle"/>
+
+    </android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/expandableButton1"
