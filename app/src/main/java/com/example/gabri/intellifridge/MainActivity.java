@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (!registered) {
             Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-            //startActivity(login);
+            startActivity(login);
         }
+
     }
 }

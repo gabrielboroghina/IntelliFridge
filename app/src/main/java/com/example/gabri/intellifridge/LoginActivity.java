@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,7 +16,6 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText emailText, passwordText;
     Button loginButton;
-    TextView signupLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         emailText = findViewById(R.id.input_email);
         passwordText = findViewById(R.id.input_password);
         loginButton = findViewById(R.id.btn_login);
-        signupLink = findViewById(R.id.link_signup);
 
         // listeners
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -37,22 +34,11 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
-
-        signupLink.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
-            }
-        });
     }
 
     public void login() {
-        Log.d(TAG, "Login");
 
-        if (!validate()) {
+        if (!validateData()) {
             onLoginFailed();
             return;
         }
@@ -60,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.Theme_AppCompat_DayNight);
+                R.style.Theme_AppCompat_DayNight_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
@@ -69,6 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
+        startActivityForResult(intent, REQUEST_SIGNUP);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -109,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(true);
     }
 
-    public boolean validate() {
+    public boolean validateData() {
         boolean valid = true;
 
         String email = emailText.getText().toString();
@@ -122,8 +112,8 @@ public class LoginActivity extends AppCompatActivity {
             emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            passwordText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 4) {
+            passwordText.setError("at least 4 alphanumeric characters");
             valid = false;
         } else {
             passwordText.setError(null);
