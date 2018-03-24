@@ -1,5 +1,10 @@
 package com.example.gabri.intellifridge.engine;
 
+import android.util.Pair;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import com.example.gabri.intellifridge.util.*;
 
@@ -10,19 +15,26 @@ import com.example.gabri.intellifridge.util.*;
 public class Cook {
 
     private static final String EDAMAM_URL = "https://api.edamam.com/search";
-    private  static final String EDAMAM_APP_ID = "d34031d2";
+    private static final String EDAMAM_APP_ID = "d34031d2";
     private static final String EDAMAM_APP_KEY = "d5c068de7a5406391fbdab34c3f2b369";
 
-    private List<Item> items;
-    public Cook(List<Item> items) {
-        this.items = items;
+    private static final int NO_INGREDIENTS_USED = 3;
+    private static final int NO_RECIPES_PROPOSED = 10;
+
+    public static List<Recipe> chooseRecipes(Fridge fridge) {
+        List<Item> items = new ArrayList<Item>();
+        int idx = 0;
+        for (Item item : fridge.getItems()) {
+            if (idx >= NO_INGREDIENTS_USED) break;
+            ++idx;
+            items.add(item);
+
+        }
+        if (items.size() == 0) return null; //No ingredients
+        return Recipe.parseRecipes(requestFromAPI(items, NO_RECIPES_PROPOSED));
     }
 
-    public List<Recipe> chooseRecipes() {
-        return Recipe.parseRecipes(requestFromAPI(items, 3, 100, 1000));
-    }
-
-    private String requestFromAPI(List<Item> items, int n, int min_cal, int max_cal) {
+    private static String requestFromAPI(List<Item> items, int n) {
         StringBuilder sb = new StringBuilder();
         sb.append(EDAMAM_URL);
         sb.append("?q=");
@@ -37,10 +49,10 @@ public class Cook {
         sb.append(EDAMAM_APP_KEY);
         sb.append("&from=0&to=");
         sb.append(n);
-        sb.append("&calories=");
-        sb.append(min_cal);
-        sb.append('-');
-        sb.append(max_cal);
+    //    sb.append("&calories=");
+    //    sb.append(min_cal);
+     //   sb.append('-');
+     //   sb.append(max_cal);
 
         try {
             return new HttpGetRequest().execute(sb.toString()).get();

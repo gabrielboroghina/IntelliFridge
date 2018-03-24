@@ -17,4 +17,5 @@ public class ItemType {
         this.nutritionalValue = nutritionalValue;
         this.perishability = perishability;
     }
+
 }

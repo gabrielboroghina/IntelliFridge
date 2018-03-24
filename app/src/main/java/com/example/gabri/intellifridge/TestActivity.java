@@ -5,22 +5,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by Talksick on 3/24/2018.
+ */
 
-    private boolean registered = false;
+public class TestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_shopping);
 
-        Button btn = findViewById(R.id.btn_login3);
+        Button btn = findViewById(R.id.babb);
+        ListView list = findViewById(R.id.list_view);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent login = new Intent(getApplicationContext(), TestActivity.class);
-                startActivity(login);
+               // list.add
             }
         });
         /*

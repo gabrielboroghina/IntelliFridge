@@ -11,4 +11,12 @@ public class NutritionalValue {
         this.carbs = carbs;
         this.fats = fats;
     }
+
+    public static double computeCalories(double carbs, double proteins, double fats) {
+        return (proteins + carbs) * 4 + fats;
+    }
+
+    public double getCalories() {
+        return computeCalories(carbs, proteins, fats);
+    }
 }

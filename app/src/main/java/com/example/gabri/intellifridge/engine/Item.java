@@ -1,5 +1,6 @@
 package com.example.gabri.intellifridge.engine;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -8,14 +9,14 @@ import java.util.Date;
 
 public class Item {
     public final ItemType type;
-    public Date date;
+    public Date expirationDate;
 
     private boolean isEaten;
-    private double quantity; //kilos
-    public Item(ItemType type, double quantity, Date date) {
+    private double quantity; //grams
+    public Item(ItemType type, double quantity, Date expirationDate) {
         this.type = type;
         this.quantity = quantity;
-        this.date = date;
+        this.expirationDate = expirationDate;
         this.isEaten = false;
     }
 
@@ -24,7 +25,27 @@ public class Item {
         if (this.quantity < 0) isEaten = true;
     }
 
+    public double getCarbs() {
+        return quantity * type.nutritionalValue.carbs;
+    }
+
+    public double getProteins() {
+        return quantity * type.nutritionalValue.proteins;
+    }
+
+    public double getFats() {
+        return quantity * type.nutritionalValue.fats;
+    }
+
     public boolean isEaten() {
         return isEaten;
+    }
+}
+
+class CompByExpiration implements Comparator<Item> {
+
+    @Override
+    public int compare(Item item1, Item item2) {
+        return item1.expirationDate.compareTo(item2.expirationDate);
     }
 }
