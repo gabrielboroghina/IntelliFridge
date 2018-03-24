@@ -45,7 +45,7 @@
             android:layout_alignParentStart="true"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:text="Start"
+            android:text="Buy grocceries"
             android:theme="@style/MyButton" />
 
         <ImageButton

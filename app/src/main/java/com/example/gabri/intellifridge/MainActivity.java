@@ -30,23 +30,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
 
-        // print user preferences
-        for (Map.Entry<String, ItemType> entry : UserDataSingleton.getInstance().getuPref().known_types.entrySet())
-            System.out.println(entry.getKey() + entry.getValue());
-
-        /*Button btn = findViewById(R.id.btn_login3);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent login = new Intent(getApplicationContext(), TestActivity.class);
-                startActivity(login);
-            }
-        });
-
-        if (!registered) {
+       /* if (!registered) {
             Intent login = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(login);
-        }*/
+        } */
     }
 }
