@@ -24,14 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
         // load food data
         DBRequest req = new DBRequest();
-        req.execute();
-
         try {
-            while (req.getStatus() != AsyncTask.Status.FINISHED)
-                Thread.sleep(100);
-        } catch (InterruptedException e) {
+            String result = req.execute().get();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         // print user preferences
         for (Map.Entry<String, ItemType> entry : UserDataSingleton.getInstance().getuPref().known_types.entrySet())

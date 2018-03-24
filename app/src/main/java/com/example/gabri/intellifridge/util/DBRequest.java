@@ -2,6 +2,7 @@ package com.example.gabri.intellifridge.util;
 
 import android.os.AsyncTask;
 
+import com.example.gabri.intellifridge.engine.ItemType;
 import com.example.gabri.intellifridge.engine.UserDataSingleton;
 import com.example.gabri.intellifridge.engine.UserPreferences;
 
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
 
 public class DBRequest extends AsyncTask<String, Void, String> {
 
@@ -42,8 +44,6 @@ public class DBRequest extends AsyncTask<String, Void, String> {
 
             for (String line : lines) {
                 String[] cols = line.split(" ");
-
-                //DEBUG System.out.println("______________" + line);
 
                 // insert item into user preferences
                 uPref.addType(cols[0], cols[5], Double.parseDouble(cols[1]), Double.parseDouble(cols[2]),
