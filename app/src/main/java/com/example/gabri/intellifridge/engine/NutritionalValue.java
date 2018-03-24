@@ -6,7 +6,7 @@ package com.example.gabri.intellifridge.engine;
 
 public class NutritionalValue {
     public final double proteins, carbs, fats;
-    public NutritionalValue(double proteins, double carbs, double fats) {
+    public NutritionalValue(double carbs, double proteins, double fats) {
         this.proteins = proteins;
         this.carbs = carbs;
         this.fats = fats;

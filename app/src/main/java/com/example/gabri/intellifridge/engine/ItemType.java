@@ -6,11 +6,11 @@ package com.example.gabri.intellifridge.engine;
 
 public class ItemType {
     public final String name;
-    public final ItemCategory category;
+    public final String category;
     public final NutritionalValue nutritionalValue;
     public final double perishability;
 
-    public ItemType(String name, ItemCategory category, NutritionalValue nutritionalValue,
+    public ItemType(String name, String category, NutritionalValue nutritionalValue,
                     double perishability) {
         this.name = name;
         this.category = category;

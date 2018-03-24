@@ -41,9 +41,18 @@ public class UserPreferences {
         return n_persons * AVG_FATS;
     }
 
-    public void setGradeByName(String name, int x) {
+    public void addType(String name, String category, double perishability, double carbs, double proteins, double fats) {
+        ItemType type = new ItemType(name, category, new NutritionalValue(carbs, proteins, fats), perishability);
+        known_types.put(name, type);
+    }
+
+    public void addGrade(String name, int grade) {
         ItemType type = known_types.get(name);
         if (type == null) return;
+        grades.put(type, grade);
+    }
+
+    public void setGradeByType(ItemType type, int x) {
         Integer grade = grades.get(type);
         if (grade == null) return;
         grades.put(type, x);
