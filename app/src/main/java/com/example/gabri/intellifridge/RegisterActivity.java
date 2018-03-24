@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3, expandableLayout4, expandableLayout5;
+    ExpandableRelativeLayout expandableLayout1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
