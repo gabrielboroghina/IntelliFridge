@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("password", password);
         startActivityForResult(intent, REQUEST_SIGNUP);
 
-        new android.os.Handler().postDelayed(
+        /*new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
@@ -69,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 1000);
+                }, 0);
+                */
     }
 
     @Override
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean validateData() {
-        boolean valid = true;
+        /*boolean valid = true;
 
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
@@ -119,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
             passwordText.setError(null);
         }
 
-        return valid;
+        return valid;*/
+        return true;
     }
 }

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
@@ -19,29 +20,37 @@ import java.net.URLEncoder;
 public class RegisterActivity extends AppCompatActivity {
 
     ExpandableRelativeLayout expandableLayout1;
+    Button btn_save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        String email = getIntent().getStringExtra("email");
-        String password = getIntent().getStringExtra("password");
+        final String email = getIntent().getStringExtra("email");
+        final String password = getIntent().getStringExtra("password");
 
+        btn_save = findViewById(R.id.btn_save);
 
-        // insert into database
-        try {
-            String result = new InsertDB(this).execute(email, password).get();
+        btn_save.setOnClickListener(new View.OnClickListener() {
 
-            if (result.contains("Error")) // successful insert
-                Toast.makeText(this, "Error at register", Toast.LENGTH_LONG).show();
-            else {
-                Toast.makeText(this, "Successful registration", Toast.LENGTH_LONG).show();
-                this.finish();
+            @Override
+            public void onClick(View v) {
+                // insert into database
+                try {
+                    String result = new InsertDB(RegisterActivity.this).execute(email, password).get();
+
+                    if (result.contains("Error")) // successful insert
+                        Toast.makeText(RegisterActivity.this, "Error at register", Toast.LENGTH_LONG).show();
+                    else {
+                        Toast.makeText(RegisterActivity.this, "Successful registration", Toast.LENGTH_LONG).show();
+                        RegisterActivity.this.finish();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     public void expandableButton1(View view) {
