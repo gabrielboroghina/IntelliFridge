@@ -5,10 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import android.widget.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,11 +13,15 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.*;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    ExpandableRelativeLayout expandableLayout1;
     Button btn_save;
+    ExpandableListView expandableListView;
+    ExpandableListAdapter expandableListAdapter;
+    List<String> expandableListTitle;
+    HashMap<String, List<String>> expandableListDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final String email = getIntent().getStringExtra("email");
         final String password = getIntent().getStringExtra("password");
+
 
         btn_save = findViewById(R.id.btn_save);
 
@@ -51,11 +53,28 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    public void expandableButton1(View view) {
-        expandableLayout1 = findViewById(R.id.expandableLayout1);
-        expandableLayout1.toggle(); // toggle expand and collapse
+        expandableListView = findViewById(R.id.expandableListView);
+        expandableListDetail = ExpandableListDataPump.getData();
+        expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
+        expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        expandableListTitle.get(groupPosition)
+                                + " -> "
+                                + expandableListDetail.get(
+                                expandableListTitle.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT
+                ).show();
+                return false;
+            }
+        });
     }
 }
 

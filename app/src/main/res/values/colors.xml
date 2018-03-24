@@ -7,6 +7,6 @@
     <color name="colorBkg">#f2f0ea</color>
     <color name="white">#f2f0ea</color>
     <color name="iron">#fde292</color>
-    <color name="indigo">#838383</color>
+    <color name="indigo">#333333</color>
     <color name="foreground_material_light">#757575</color>
 </resources>
