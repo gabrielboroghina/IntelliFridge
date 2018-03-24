@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PrimaryButton" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorButtonNormal">@color/colorBkg</item>
+        <item name="colorControlHighlight">@color/colorText</item>
+    </style>
+
 </resources>
