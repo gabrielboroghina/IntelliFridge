@@ -23,18 +23,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // load food data
-        DBRequest req = new DBRequest();
+        DBRequest req = new DBRequest("get_food.php");
         try {
-            String result = req.execute().get();
+            req.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        req = new DBRequest("get_grades.php");
+        try {
+            req.execute().get();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         startActivity(new Intent(getApplicationContext(), MenuActivity.class));
 
-       /* if (!registered) {
+        /*if (!registered) {
             Intent login = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(login);
-        } */
+        }*/
     }
 }

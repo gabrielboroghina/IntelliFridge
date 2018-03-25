@@ -32,9 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String email = getIntent().getStringExtra("email");
         final String password = getIntent().getStringExtra("password");
 
-
         btn_save = findViewById(R.id.btn_save);
-
         btn_save.setOnClickListener(new View.OnClickListener() {
 
             @Override

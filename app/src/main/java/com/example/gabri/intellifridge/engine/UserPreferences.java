@@ -1,5 +1,6 @@
 package com.example.gabri.intellifridge.engine;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -8,7 +9,7 @@ import java.util.Set;
  * Created by Talksick on 3/24/2018.
  */
 
-public class UserPreferences {
+public class UserPreferences implements Serializable {
     public static final double AVG_CARBS = 275;
     public static final double AVG_PROTEINS = 50;
     public static final double AVG_FATS = 70;
