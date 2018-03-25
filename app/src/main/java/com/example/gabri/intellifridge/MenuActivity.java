@@ -30,20 +30,24 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.btn_menu1:
                 showDaysPicker();
                 break;
             case R.id.btn_menu2:
                 break;
             case R.id.btn_menu3:
-
+                showLocation();
                 break;
         }
     }
 
-    public void showDaysPicker()
-    {
+    public void showLocation() {
+        Intent shareHaideAct = new Intent(getApplicationContext(), ShareHaideActivity.class);
+        startActivity(shareHaideAct);
+    }
+
+    public void showDaysPicker() {
         final Dialog d = new Dialog(MenuActivity.this);
         d.setTitle("Pick days");
         d.setContentView(R.layout.dialog_days);
@@ -53,22 +57,20 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         np.setMaxValue(30);
         np.setMinValue(1);
         np.setWrapSelectorWheel(false);
-        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener(){
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
 
             }
         });
-        b1.setOnClickListener(new View.OnClickListener()
-        {
+        b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ShoppingActivity.class).putExtra("days", np.getValue()));
                 d.dismiss();
             }
         });
-        b2.setOnClickListener(new View.OnClickListener()
-        {
+        b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 d.dismiss();
