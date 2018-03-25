@@ -1,17 +1,10 @@
 package com.example.gabri.intellifridge;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 
-import com.example.gabri.intellifridge.engine.ItemType;
-import com.example.gabri.intellifridge.engine.UserDataSingleton;
 import com.example.gabri.intellifridge.util.DBRequest;
-
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,11 +30,18 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-
-        /*if (!registered) {
+        if (!registered) {
             Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(login);
-        }*/
+            startActivityForResult(login, 1);
+        } else {
+            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 1) {
+            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+        }
     }
 }

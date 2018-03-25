@@ -48,8 +48,8 @@ public class DBRequest extends AsyncTask<String, Void, String> {
                 if (script.equals("get_grades.php"))
                     uPref.addGrade(cols[0], Integer.parseInt(cols[1]));
                 else
-                    uPref.addType(cols[0], cols[5], Double.parseDouble(cols[1]), Double.parseDouble(cols[2]),
-                            Double.parseDouble(cols[3]), Double.parseDouble(cols[4]));
+                    uPref.addType(cols[0], cols[5], Double.parseDouble(cols[4]), Double.parseDouble(cols[1]),
+                            Double.parseDouble(cols[2]), Double.parseDouble(cols[3]));
             }
             Log.i("OMG", "" + uPref.getTypes().size());
 
