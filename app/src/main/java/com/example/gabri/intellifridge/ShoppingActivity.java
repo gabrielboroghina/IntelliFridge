@@ -2,6 +2,7 @@ package com.example.gabri.intellifridge;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ class CustomAdapter extends ArrayAdapter<Merchant.Choice> {
         super(context, R.layout.list_shopping, items);
         // TODO Auto-generated constructor stub
 
-        this.context=context;
+        this.context=  context;
         this.items = items;
     }
 
@@ -46,10 +47,16 @@ class CustomAdapter extends ArrayAdapter<Merchant.Choice> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item_name);
         TextView extratxt = (TextView) rowView.findViewById(R.id.item_quantity);
         ImageView image1 = (ImageView) rowView.findViewById(R.id.icon1);
-        ImageView image2 = (ImageView) rowView.findViewById(R.id.icon1);
+        ImageView image2 = (ImageView) rowView.findViewById(R.id.icon2);
 
         txtTitle.setText(items.get(position).item.type.name);
         extratxt.setText("" + items.get(position).item.getQuantity() + "g");
+        image1.setImageDrawable(context.getResources().getDrawable(R.drawable.square));
+        image2.setImageDrawable(context.getResources().getDrawable(R.drawable.square));
+        double a = items.get(position).importance;
+        double b = items.get(position).availability;
+        image1.setColorFilter(Color.rgb((int)((1 - a) * 255),(int)(a * 255),0));
+        image2.setColorFilter(Color.rgb((int)((1 - b) * 255),(int)(b * 255),0));
         return rowView;
     };
 }
@@ -82,18 +89,15 @@ public class ShoppingActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), tmp.get(position).item.text + " added to the fridge!", Toast.LENGTH_LONG).show();
                 UserDataSingleton.getInstance().getFridge().addItem(tmp.get(position).item);
-                List<String> list = new ArrayList<String>();
-                tmp.clear();
-                tmp.addAll(Merchant.giveSuggestions(UserDataSingleton.getInstance().getuPref(),
-                        UserDataSingleton.getInstance().getFridge(), n_days));
                 adapter.clear();
-                adapter.addAll(tmp);
+                adapter.addAll(Merchant.giveSuggestions(UserDataSingleton.getInstance().getuPref(),
+                                    UserDataSingleton.getInstance().getFridge(), n_days));
                 adapter.notifyDataSetChanged();
                 parent.invalidate();
             }
         });
 
-    /*
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +115,7 @@ public class ShoppingActivity extends AppCompatActivity {
 
         List<String> list = new ArrayList<String>();
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, R.layout.list_shopping, R.id.item, list);
+                (this, R.layout.list_shopping, R.id.item_name, list);
 
         final List<Merchant.Choice> tmp = Merchant.giveSuggestions(UserDataSingleton.getInstance().getuPref(),
                 UserDataSingleton.getInstance().getFridge(), n_days);
