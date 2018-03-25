@@ -53,6 +53,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 showDaysPicker();
                 break;
             case R.id.btn_menu2:
+                startActivity(new Intent(getApplicationContext(), EatActivity.class));
                 break;
             case R.id.btn_menu3:
                 dispatchTakePictureIntent();

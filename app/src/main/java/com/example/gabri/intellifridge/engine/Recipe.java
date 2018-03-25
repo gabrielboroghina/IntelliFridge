@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 
 public class Recipe {
-    private String name;
-    private String recipeURL, imageURL;
+    public String name;
+    public String recipeURL, imageURL;
 
     public Recipe(String name, String recipeURL, String imageURL) {
         this.name = name;

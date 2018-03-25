@@ -31,9 +31,9 @@ public class Merchant {
         return 1.0;
     }
     private static double computeDecayFactor(ItemType type, int n_days) {
-        double tmp = type.perishability - n_days * 0.25;
+        double tmp = type.perishability;
         if (tmp < 0) tmp = 0.0;
-        tmp /= n_days * 0.75;
+        tmp /= n_days * 0.5;
         if (tmp > 1) tmp = 1.0;
         return tmp;
     }
