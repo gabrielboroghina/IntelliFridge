@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.gabri.intellifridge.util.DBRequest;
 
 public class MainActivity extends AppCompatActivity {
-
     private boolean registered = false;
 
     @Override
@@ -23,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // load food grades data
         req = new DBRequest("get_grades.php");
         try {
             req.execute().get();
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (!registered) {
+        if (!registered) { // go to the registration page
             Intent login = new Intent(getApplicationContext(), LoginActivity.class);
             startActivityForResult(login, 1);
         } else {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
+        // check which request we're responding to
         if (requestCode == 1) {
             startActivityForResult(new Intent(getApplicationContext(), MenuActivity.class), 3);
         } else if (requestCode == 3)
