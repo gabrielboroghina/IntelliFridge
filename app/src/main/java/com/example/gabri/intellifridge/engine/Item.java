@@ -10,6 +10,7 @@ import java.util.Date;
 public class Item {
     public final ItemType type;
     public Date expirationDate;
+    public final String text;
 
     private boolean isEaten;
     private double quantity; //grams
@@ -18,6 +19,7 @@ public class Item {
         this.quantity = quantity;
         this.expirationDate = expirationDate;
         this.isEaten = false;
+        this.text = quantity + "g of " + type.name;
     }
 
     public void eat(double quantity) {

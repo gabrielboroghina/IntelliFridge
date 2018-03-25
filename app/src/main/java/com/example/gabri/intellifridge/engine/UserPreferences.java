@@ -10,9 +10,9 @@ import java.util.Set;
  */
 
 public class UserPreferences implements Serializable {
-    public static final double AVG_CARBS = 275;
-    public static final double AVG_PROTEINS = 50;
-    public static final double AVG_FATS = 70;
+    public static final double AVG_CARBS = 290;
+    public static final double AVG_PROTEINS = 100;
+    public static final double AVG_FATS = 75;
 
     public final static int MAX_GRADE = 5;
 

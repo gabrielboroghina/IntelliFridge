@@ -66,6 +66,19 @@ public class Merchant {
         return ans;
     }
 
+    private static double computeQuantity(double carbs_need, double proteins_need, double fats_need,
+                                            ItemType type, int n_days) {
+        int n_products = estimateNumberOfProducts(n_days);
+        double ans1 = carbs_need / type.nutritionalValue.carbs;
+        double ans2 = proteins_need / type.nutritionalValue.proteins;
+        double ans3 = fats_need / type.nutritionalValue.fats;
+        double ans = Math.min(ans1, Math.min(ans2, ans3));
+        return ans / n_products;
+  //      return (ans / n_products + computeQuantity(type.nutritionalValue.getCalories(),
+ //               NutritionalValue.computeCalories(carbs_need, proteins_need, fats_need),
+  //               n_days) / n_products) / 2;
+    }
+
     private static double computeQuantity(double calories, double calories_need, int n_days) {
         int n_products = estimateNumberOfProducts(n_days);
         return calories_need / calories / n_products;
@@ -102,7 +115,7 @@ public class Merchant {
 
         List<Choice> ans = new ArrayList<Choice>();
         for (ItemType type : preferences.getTypes()) {
-            double quantity = estimate(computeQuantity(type.nutritionalValue.getCalories(), total_calorie_need, n_days));
+            double quantity = estimate(computeQuantity(total_carbs_need, total_proteins_need, total_fats_need, type, n_days));
             double f1 = computeDecayFactor(type, n_days);
             double f2 = computeDesireFactor(type, preferences);
             double f3 = computeNatureFactor(type, preferences, relative_carbs_need, relative_proteins_need, relative_fats_need);

@@ -9,14 +9,10 @@ import android.util.Log;
 public class NutritionalValue {
     public final double proteins, carbs, fats;
     public NutritionalValue(double carbs, double proteins, double fats) {
-        if (proteins + carbs + fats > 1) {
-            proteins /= 100;
-            carbs /= 100;
-            fats /= 100;
-        }
         this.proteins = proteins;
         this.carbs = carbs;
         this.fats = fats;
+        Log.i("WTF", " " + carbs + " " + proteins + " " + fats);
     }
 
     public static double computeCalories(double carbs, double proteins, double fats) {
