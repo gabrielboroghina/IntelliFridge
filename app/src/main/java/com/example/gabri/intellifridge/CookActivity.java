@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -90,11 +91,11 @@ class CustomAdapter3 extends ArrayAdapter<Recipe> {
 
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item_name);
-        TextView extratxt = (TextView) rowView.findViewById(R.id.item_quantity);
+      //  TextView extratxt = (TextView) rowView.findViewById(R.id.item_quantity);
         ImageView image = (ImageView) rowView.findViewById(R.id.icon1);
 
         txtTitle.setText(items.get(position).name);
-        extratxt.setText("" + items.get(position).recipeURL);
+    ///    extratxt.setText("" + items.get(position).recipeURL);
     try {
         new DownloadImageTask(image)
                 .execute(items.get(position).imageURL);
@@ -136,6 +137,8 @@ public class CookActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(position).recipeURL));
+                startActivity(browserIntent);
            //     Toast.makeText(getApplicationContext(), list.get(position).text + " eaten!", Toast.LENGTH_LONG).show();
              //   UserDataSingleton.getInstance().getFridge().getItems().remove(list.get(position));
 
