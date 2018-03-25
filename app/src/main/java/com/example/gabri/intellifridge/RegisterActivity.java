@@ -21,13 +21,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_save;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
     HashMap<String, Integer> rating;
+
+    @Override
+    public void onClick(View view) {
+        //if (view.getId() == R.id.rating)
+            Toast.makeText(RegisterActivity.this, "Successful registration", Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,27 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
         expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
-
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-
-                //TODO
-                rating.put(expandableListDetail.get(expandableListTitle.get(groupPosition)).get(
-                        childPosition), 0);
-
-                Toast.makeText(
-                        getApplicationContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show();
-                return false;
-            }
-        });
     }
 }
 
@@ -112,8 +97,6 @@ class InsertDB extends AsyncTask<String, Void, String> {
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-
-            conn.connect();
 
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 

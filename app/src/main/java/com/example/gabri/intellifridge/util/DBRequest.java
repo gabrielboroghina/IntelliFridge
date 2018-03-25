@@ -23,7 +23,6 @@ public class DBRequest extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... arg0) {
-
         try {
             // get food/grades data from database
             String link = "https://dp-experts.000webhostapp.com/" + script;
@@ -65,5 +64,4 @@ public class DBRequest extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
     }
-
 }
