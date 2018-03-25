@@ -25,27 +25,40 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_menu1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Buy grocceries" />
 
-            <Button
-                android:id="@+id/btn_menu2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Eat something" />
+                <Button
+                    android:id="@+id/btn_menu1"
+                    style=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="Buy grocceries"
+                    android:theme="@style/MyButton" />
 
-            <Button
-                android:id="@+id/btn_menu3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Share food" />
+                <Button
+                    android:id="@+id/btn_menu2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="Eat something"
+                    android:theme="@style/MyButton" />
+
+                <Button
+                    android:id="@+id/btn_menu3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="Share food"
+                    android:theme="@style/MyButton" />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

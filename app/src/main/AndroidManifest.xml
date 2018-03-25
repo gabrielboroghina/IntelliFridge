@@ -21,7 +21,7 @@
         <activity android:name=".ShoppingActivity"></activity>
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".ShareHaideActivity"></activity>
+        <activity android:name=".ShareFoodActivity"></activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>

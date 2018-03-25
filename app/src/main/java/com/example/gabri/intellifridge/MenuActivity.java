@@ -12,10 +12,6 @@ import android.widget.NumberPicker;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * Created by Talksick on 3/24/2018.
- */
-
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     static final int REQUEST_IMAGE_CAPTURE = 13;
 
@@ -44,9 +40,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             byte[] byteArray = stream.toByteArray();
 
             // call share location activity
-            Intent shareHaideAct = new Intent(getApplicationContext(), ShareHaideActivity.class);
-            shareHaideAct.putExtra("image", byteArray);
-            startActivity(shareHaideAct);
+            Intent shareFoodAct = new Intent(getApplicationContext(), ShareFoodActivity.class);
+            shareFoodAct.putExtra("image", byteArray);
+            startActivity(shareFoodAct);
         }
     }
 
@@ -69,9 +65,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
-    }
-
-    public void showLocation() {
     }
 
     public void showDaysPicker() {
