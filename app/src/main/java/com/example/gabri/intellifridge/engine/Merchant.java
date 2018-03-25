@@ -138,7 +138,7 @@ public class Merchant {
         public Choice(Item item, double importance, double availability) {
             this.item = item;
             this.importance = importance;
-            this.availability = availability;
+            this.availability = vailability;
         }
 
         @Override
