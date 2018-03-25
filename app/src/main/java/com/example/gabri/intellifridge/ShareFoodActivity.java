@@ -11,7 +11,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,12 +47,26 @@ public class ShareFoodActivity extends FragmentActivity implements OnMapReadyCal
 
         ImageView imgView = findViewById(R.id.imageView2);
         imgView.setImageBitmap(bmp);
+
+        Button shareBtn = findViewById(R.id.shareNow);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ShareFoodActivity.this, "Food was shared", Toast.LENGTH_LONG).show();
+
+                try {
+                    Thread.sleep(800);
+                } catch (Exception e) {
+                }
+
+                ShareFoodActivity.this.finish();
+            }
+        });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         setLocationMarker();
     }
 
@@ -62,8 +79,6 @@ public class ShareFoodActivity extends FragmentActivity implements OnMapReadyCal
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -71,8 +86,8 @@ public class ShareFoodActivity extends FragmentActivity implements OnMapReadyCal
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
 
+            // Permission is not granted
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
@@ -83,8 +98,8 @@ public class ShareFoodActivity extends FragmentActivity implements OnMapReadyCal
     public void setLocationMarker() {
         currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        LatLng sydney = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker My Fridge"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+        LatLng myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker My Fridge"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
     }
 }
