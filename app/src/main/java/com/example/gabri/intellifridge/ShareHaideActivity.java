@@ -1,8 +1,11 @@
 package com.example.gabri.intellifridge;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,8 +26,13 @@ public class ShareHaideActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
+        byte[] byteArray = getIntent().getByteArrayExtra("image");
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+        ImageView imgView = findViewById(R.id.imageView2);
+        imgView.setImageBitmap(bmp);
+    }
 
     /**
      * Manipulates the map once available.
@@ -44,6 +52,5 @@ public class ShareHaideActivity extends FragmentActivity implements OnMapReadyCa
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker My Fridge"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
-
     }
 }
