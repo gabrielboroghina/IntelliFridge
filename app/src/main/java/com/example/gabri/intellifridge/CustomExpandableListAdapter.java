@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -35,6 +38,10 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return expandedListPosition;
     }
 
+    public long getChildSize(int listPosition) {
+        return expandableListDetail.get(expandableListTitle.get(listPosition)).size();
+    }
+
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
@@ -45,8 +52,8 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_item, null);
         }
 
-        TextView expandedListTextView = convertView.findViewById(R.id.expandedListItem);
-        expandedListTextView.setText(expandedListText);
+        LinearLayout expandedListTextView = convertView.findViewById(R.id.expandedListItem);
+        ((TextView) expandedListTextView.getChildAt(0)).setText(expandedListText);
         return convertView;
     }
 
