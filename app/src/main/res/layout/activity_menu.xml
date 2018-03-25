@@ -16,8 +16,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2">
-
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:weightSum="3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/cardview_dark_background"
+                android:layout_weight="1">
+            <ListView
+                android:id="@+id/lv_shopping"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background" />
+             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -38,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="20dp"
                     android:paddingTop="20dp"
-                    android:text="Buy grocceries"
+                    android:text="Buy groceries"
                     android:theme="@style/MyButton" />
 
                 <Button

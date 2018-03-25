@@ -3,14 +3,23 @@ package com.example.gabri.intellifridge;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.Toast;
+
+import com.example.gabri.intellifridge.engine.Item;
+import com.example.gabri.intellifridge.engine.UserDataSingleton;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     static final int REQUEST_IMAGE_CAPTURE = 13;
@@ -26,6 +35,55 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         btn2.setOnClickListener(this);
         Button btn3 = findViewById(R.id.btn_menu3);
         btn3.setOnClickListener(this);
+        ((View)findViewById(R.id.lv_shopping).getParent()).setAlpha(0.0f);
+    }
+    @Override
+    protected void onRestart() {
+// TODO Auto-generated method stub
+        super.onRestart();
+
+        ListView list_view = findViewById(R.id.lv_shopping);
+
+        final List<Item> list = new ArrayList<>();
+        for (Item item : UserDataSingleton.getInstance().getFridge().getItems()) {
+            list.add(item);
+        }
+        List<Item> wtf = new ArrayList<>();
+        int idx = 0;
+        for (Item item : UserDataSingleton.getInstance().getFridge().getItems()) {
+            if (idx > 1 || item.type.perishability > 7) break;
+            ++idx;
+            wtf.add(item);
+        };
+
+        final CustomAdapter2 adapter = new CustomAdapter2(this, wtf);
+        adapter.notifyDataSetChanged();
+        list_view.setAdapter(adapter);
+        if (idx == 0) ((View)list_view.getParent()).setAlpha(0.0f);
+        else ((View)list_view.getParent()).setAlpha(0.7f);
+        list_view.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), list.get(position).text + " eaten!", Toast.LENGTH_LONG).show();
+                UserDataSingleton.getInstance().getFridge().getItems().remove(list.get(position));
+
+                List<Item> wtf = new ArrayList<>();
+                int idx = 0;
+                for (Item item : UserDataSingleton.getInstance().getFridge().getItems()) {
+                    if (idx > 1 || item.type.perishability > 7) break;
+                    ++idx;
+                    wtf.add(item);
+                }
+                if (idx == 0) ((View)parent.getParent()).setAlpha(0.0f);
+                else ((View)parent.getParent()).setAlpha(0.7f);
+
+                adapter.clear();
+                adapter.addAll(wtf);
+                adapter.notifyDataSetChanged();
+                parent.invalidate();
+            }
+        });
     }
 
     @Override
