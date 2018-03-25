@@ -4,79 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context="com.example.gabri.intellifridge.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background"
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bere"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="90dp">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/btn_login4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_login2"
-            android:layout_alignParentStart="true"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            android:text="Others1"
-            android:theme="@style/MyButton" />
-
-        <Button
-            android:id="@+id/btn_login2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="42dp"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            android:text="Others2"
-            android:theme="@style/MyButton"
-            tools:layout_editor_absoluteY="471dp" />
-
-        <Button
-            android:id="@+id/btn_login3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_login4"
-            android:layout_alignParentStart="true"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            android:text="Buy grocceries"
-            android:theme="@style/MyButton" />
-
-        <ImageButton
-            android:id="@+id/imageButton3"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/editText2"
-            android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/next_right" />
+            app:srcCompat="@drawable/text"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="61dp" />
+    </GridLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/editText2"
-            android:layout_below="@+id/editText2"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/next_left" />
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/imageButton3"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="83dp"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:text="Acesta este un text"
-            android:textColor="@android:color/background_dark" />
-
-    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
