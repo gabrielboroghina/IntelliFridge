@@ -1,6 +1,5 @@
 package com.example.gabri.intellifridge;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,19 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity {
     Button btn_save;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
     HashMap<String, Integer> rating;
-
-    @Override
-    public void onClick(View view) {
-        //if (view.getId() == R.id.rating)
-            Toast.makeText(RegisterActivity.this, "Successful registration", Toast.LENGTH_LONG).show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +42,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 // insert into database
                 try {
-                    String result = new InsertDB(RegisterActivity.this).execute(email, password).get();
+                    String result = new InsertDB().execute(email, password).get();
 
                     if (result.contains("Error")) // successful insert
-                        Toast.makeText(RegisterActivity.this, "Error at register", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "Error at registraton", Toast.LENGTH_LONG).show();
                     else {
-                        Toast.makeText(RegisterActivity.this, "Successful registration", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "Successful registration", Toast.LENGTH_SHORT).show();
                         RegisterActivity.this.finish();
                     }
                 } catch (Exception e) {
@@ -63,19 +56,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+        // set the expandable view
         expandableListView = findViewById(R.id.expandableListView);
         expandableListDetail = ExpandableListDataPump.getData();
         expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
+
+       /* expandableListView.setOnChildClickListener(
+                new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                        Toast.makeText(RegisterActivity.this, "Error at registraton", Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                }
+        );*/
     }
 }
 
 class InsertDB extends AsyncTask<String, Void, String> {
-    private Context context;
 
-    public InsertDB(Context context) {
-        this.context = context;
+    public InsertDB() {
     }
 
     protected void onPreExecute() {

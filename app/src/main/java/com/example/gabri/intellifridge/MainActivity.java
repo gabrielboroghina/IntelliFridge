@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == 1) {
-            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-        }
+            startActivityForResult(new Intent(getApplicationContext(), MenuActivity.class), 3);
+        } else if (requestCode == 3)
+            this.finish();
     }
 }

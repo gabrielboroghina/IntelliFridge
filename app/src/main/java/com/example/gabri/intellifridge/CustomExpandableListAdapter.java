@@ -5,12 +5,14 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -36,10 +38,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public long getChildId(int listPosition, int expandedListPosition) {
         return expandedListPosition;
-    }
-
-    public long getChildSize(int listPosition) {
-        return expandableListDetail.get(expandableListTitle.get(listPosition)).size();
     }
 
     @Override
